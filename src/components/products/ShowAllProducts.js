@@ -25,6 +25,23 @@ export default function ShowAllProducts() {
     getProducts();
   }, []);
 
+  // handle search
+  const search = (e) => {
+    setQuery(e.target.value);
+    // if query is empty string then call the get products function
+    if (query.trim().length === 0) {
+      setIsLoading(true);
+      getProducts();
+      return;
+    }
+    // setting products according to query
+    setProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase().trim())
+      )
+    );
+  };
+
   // JSX
   return (
     <div>
@@ -39,26 +56,14 @@ export default function ShowAllProducts() {
         )}
       </div>
       <nav
-        class="navbar navbar-light d-flex justify-content-center"
+        className="navbar navbar-light d-flex justify-content-center"
         style={{ backgroundColor: "#e3f2fd" }}
       >
         <input
           type="text"
           placeholder="Search Product"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            if(query.trim() === "") {
-              console.log("in if")
-              getProducts()
-              return
-            }
-            setProducts(
-              products.filter((product) =>
-                product.title.toLowerCase().includes(query.toLowerCase().trim())
-              )
-            );
-          }}
+          onChange={search}
         />
       </nav>
       <div>
