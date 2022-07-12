@@ -3,10 +3,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function ShowAllProducts() {
+  // setting state variables.
   const [products, setProducts] = useState(null);
   const [alertMsg, setAlertMsg] = useState();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [query, setQuery] = useState("");
+  // getting all the products from the backend.
   const getProducts = async () => {
     document.title = "All Products";
     try {
@@ -17,9 +19,13 @@ export default function ShowAllProducts() {
     }
     setIsLoading(false);
   };
+
+  // use effect hook.
   useEffect(() => {
     getProducts();
   }, []);
+
+  // JSX
   return (
     <div>
       <div>{alertMsg && <div className="text-danger">{alertMsg} </div>}</div>
@@ -32,6 +38,29 @@ export default function ShowAllProducts() {
           </div>
         )}
       </div>
+      <nav
+        class="navbar navbar-light d-flex justify-content-center"
+        style={{ backgroundColor: "#e3f2fd" }}
+      >
+        <input
+          type="text"
+          placeholder="Search Product"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            if(query.trim() === "") {
+              console.log("in if")
+              getProducts()
+              return
+            }
+            setProducts(
+              products.filter((product) =>
+                product.title.toLowerCase().includes(query.toLowerCase().trim())
+              )
+            );
+          }}
+        />
+      </nav>
       <div>
         {!isLoading && products && products.length > 0 && (
           <div className="row m-2">
@@ -72,7 +101,9 @@ export default function ShowAllProducts() {
                       </p>
                       <div>
                         <div className="h4">${product.price}</div>
-                        <div>{rating}, {product.rating.count}</div>
+                        <div>
+                          {rating}, {product.rating.count}
+                        </div>
                         <div className="d-flex justify-content-center p-2">
                           <Link
                             className="btn btn-primary"
