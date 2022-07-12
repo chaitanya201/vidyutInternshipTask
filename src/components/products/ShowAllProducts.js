@@ -55,17 +55,19 @@ export default function ShowAllProducts() {
           </div>
         )}
       </div>
-      <nav
-        className="navbar navbar-light d-flex justify-content-center"
-        style={{ backgroundColor: "#e3f2fd" }}
-      >
-        <input
-          type="text"
-          placeholder="Search Product"
-          value={query}
-          onChange={search}
-        />
-      </nav>
+      {!isLoading && products && (
+        <nav
+          className="navbar navbar-light d-flex justify-content-center"
+          style={{ backgroundColor: "#e3f2fd" }}
+        >
+          <input
+            type="text"
+            placeholder="Search Product"
+            value={query}
+            onChange={search}
+          />
+        </nav>
+      )}
       <div>
         {!isLoading && products && products.length > 0 && (
           <div className="row m-2">
