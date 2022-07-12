@@ -28,9 +28,11 @@ export default function ShowSingleProduct() {
 
   return (
     <div className="m-5">
-    <div className="m-2">
-        <Link to={'/'} className='bg-info text-white p-2 rounded '>BACK</Link>
-    </div>
+      <div className="m-2">
+        <Link to={"/"} className="bg-info text-white p-2 rounded ">
+          BACK
+        </Link>
+      </div>
       <div className="d-flex me-5 pe-5">
         <div className="d-flex justify-content-center border border-2 flex-fill">
           <img src={product.image} alt="product-img" className="w-50" />
@@ -49,7 +51,9 @@ export default function ShowSingleProduct() {
                 {product.category}
               </text>
             </div>
-            <div>{product.description}</div>
+            <div style={{ paddingLeft: "5%", paddingRight: "5%" }} className='border border-1 pt-1'>
+              {product.description}
+            </div>
             <div className="h4 mt-3 me-3">Price: ${product.price}</div>
 
             <div style={{ paddingRight: "15%" }} className="d-flex">
@@ -59,27 +63,31 @@ export default function ShowSingleProduct() {
               </div>
             </div>
             <div>
-              <div className="center">
+              <div className="d-flex justify-content-center">
+                <div className="center">
+                  <div className="buttons d-flex flex-row">
+                    <div className="cart">
+                      <i className="fa fa-shopping-cart"></i>
+                    </div>
+                    <button className="btn btn-success cart-button px-5">
+                      <span className="dot"></span>
+                      Buy Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center">
+              <div className="center pt-2">
                 <div className="buttons d-flex flex-row">
                   <div className="cart">
                     <i className="fa fa-shopping-cart"></i>
                   </div>
-                  <button className="btn btn-success cart-button px-5">
+                  <button className="btn btn-info cart-button px-5">
                     <span className="dot"></span>
-                    Buy Now
+                    Add To Cart
                   </button>
                 </div>
-              </div>
-            </div>
-            <div className="center pt-2">
-              <div className="buttons d-flex flex-row">
-                <div className="cart">
-                  <i className="fa fa-shopping-cart"></i>
-                </div>
-                <button className="btn btn-info cart-button px-5">
-                  <span className="dot"></span>
-                  Add To Cart
-                </button>
               </div>
             </div>
           </div>
